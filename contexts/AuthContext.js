@@ -8,7 +8,6 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Sử dụng setTimeout để tránh gọi setState đồng bộ
     const timer = setTimeout(() => {
       const savedUser = localStorage.getItem("user");
       if (savedUser) {

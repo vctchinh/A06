@@ -13,7 +13,6 @@ import {
   LogOut,
 } from "lucide-react";
 
-// Component Layout
 const SimpleLayout = ({ children, user }) => {
   const { logout } = useAuth();
   const router = useRouter();
@@ -25,7 +24,6 @@ const SimpleLayout = ({ children, user }) => {
 
   return (
     <div className="flex min-h-screen bg-[#101922] font-[Work_Sans]">
-      {/* Sidebar */}
       <aside className="w-64 bg-[#1A202C] border-r border-gray-800 hidden md:flex flex-col">
         <div className="p-6 flex items-center gap-2">
           <span className="text-xl font-bold text-white">UserSystem</span>
@@ -56,9 +54,7 @@ const SimpleLayout = ({ children, user }) => {
         </div>
       </aside>
 
-      {/* Main content */}
       <main className="flex-1 overflow-y-auto">
-        {/* Header */}
         <header className="bg-[#1A202C] border-b border-gray-800 px-8 py-4 flex justify-between items-center sticky top-0 z-10">
           <h2 className="w-full text-white font-semibold text-center text-3xl">
             Dashboard
@@ -71,7 +67,6 @@ const SimpleLayout = ({ children, user }) => {
   );
 };
 
-// StatCard Component
 const StatCard = ({
   title,
   value,
@@ -102,7 +97,6 @@ const StatCard = ({
   </div>
 );
 
-// ChartPlaceholder Component
 const ChartPlaceholder = () => (
   <div className="bg-[#101922] h-80 rounded-lg border border-dashed border-gray-700 flex flex-col items-center justify-center text-center text-[#9dabb9]">
     <BarChart3 className="w-16 h-16 mb-4 opacity-50" />
@@ -113,21 +107,18 @@ const ChartPlaceholder = () => (
   </div>
 );
 
-// Dashboard Component chính
 const DashboardPage = () => {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [regPeriod, setRegPeriod] = useState("week");
   const [chartTimeRange, setChartTimeRange] = useState("12m");
 
-  // Redirect nếu không có user
   useEffect(() => {
     if (!loading && !user) {
       router.push("/login");
     }
   }, [user, loading, router]);
 
-  // Hiển thị loading
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#101922]">
@@ -136,7 +127,6 @@ const DashboardPage = () => {
     );
   }
 
-  // Không render nếu không có user
   if (!user) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#101922]">
@@ -157,10 +147,8 @@ const DashboardPage = () => {
     return "+12% so với tháng trước";
   };
 
-  // Giao diện chính
   return (
     <SimpleLayout user={user}>
-      {/* Header */}
       <div className="mb-8">
         <h1 className="text-white text-3xl font-bold mb-2">Overview</h1>
         <p className="text-[#9dabb9]">
@@ -170,7 +158,6 @@ const DashboardPage = () => {
       </div>
 
       <div className="grid gap-6 mb-8 md:grid-cols-2 lg:grid-cols-3">
-        {/* Card 1: Tổng User */}
         <StatCard
           title="Total Users"
           value="1,254"
@@ -180,7 +167,6 @@ const DashboardPage = () => {
           footerColor="text-gray-400"
         />
 
-        {/* Card 2: User bị khóa */}
         <StatCard
           title="Disabled Accounts"
           value="23"
@@ -190,7 +176,6 @@ const DashboardPage = () => {
           footerColor="text-gray-400"
         />
 
-        {/* Card 3: Đăng ký mới (Có filter) */}
         <StatCard
           title="New Registrations"
           value={getRegistrationCount()}
@@ -215,7 +200,6 @@ const DashboardPage = () => {
         </StatCard>
       </div>
 
-      {/* Chart Section */}
       <div className="bg-[#1A202C] p-6 rounded-xl border border-gray-800 shadow-lg">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
           <div>
