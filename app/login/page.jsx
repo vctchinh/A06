@@ -21,14 +21,15 @@ export default function LoginPage() {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   // React Query
+  // React Query
   const mutation = useMutation({
     mutationFn: (loginData) => axios.post("/api/user/login", loginData),
     onSuccess: (response) => {
-      const userData = response.data.user;
-      toast.success(response.data.message);
+      const { user, token, expiresAt, message } = response.data;
+      toast.success(message);
 
-      // Lưu thông tin user vào context
-      login(userData);
+      // Lưu thông tin user và token vào context
+      login({ user, token, expiresAt });
 
       setTimeout(() => {
         router.push("/dashboard");
