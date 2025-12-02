@@ -13,8 +13,8 @@ import {
   LogOut,
 } from "lucide-react";
 
-const SimpleLayout = ({ children, user }) => {
-  const { logout } = useAuth();
+const SimpleLayout = ({ children }) => {
+  const { user, logout } = useAuth();
   const router = useRouter();
 
   const handleLogout = () => {
@@ -61,7 +61,16 @@ const SimpleLayout = ({ children, user }) => {
           </h2>
         </header>
 
-        <div className="p-8">{children}</div>
+        <div className="p-8">
+          <div className="mb-8">
+            <h1 className="text-white text-3xl font-bold mb-2">Overview</h1>
+            <p className="text-[#9dabb9]">
+              Chào mừng trở lại, {user?.email || "Người dùng"}. Dưới đây là tình
+              hình hệ thống đăng ký người dùng.
+            </p>
+          </div>
+          {children}
+        </div>
       </main>
     </div>
   );
@@ -148,15 +157,7 @@ const DashboardPage = () => {
   };
 
   return (
-    <SimpleLayout user={user}>
-      <div className="mb-8">
-        <h1 className="text-white text-3xl font-bold mb-2">Overview</h1>
-        <p className="text-[#9dabb9]">
-          Chào mừng trở lại, {user.email}. Dưới đây là tình hình hệ thống đăng
-          ký người dùng.
-        </p>
-      </div>
-
+    <SimpleLayout>
       <div className="grid gap-6 mb-8 md:grid-cols-2 lg:grid-cols-3">
         <StatCard
           title="Total Users"

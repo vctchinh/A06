@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function LoginPage() {
   const {
@@ -543,7 +543,6 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Thêm animation */}
       <style jsx global>{`
         @keyframes fadeIn {
           from {

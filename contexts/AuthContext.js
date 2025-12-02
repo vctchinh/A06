@@ -25,9 +25,10 @@ export function AuthProvider({ children }) {
     return () => clearTimeout(timer);
   }, []);
 
-  const login = (userData) => {
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+  const login = (responseData) => {
+    const { user } = responseData;
+    setUser(user);
+    localStorage.setItem("user", JSON.stringify(user));
   };
 
   const logout = () => {
